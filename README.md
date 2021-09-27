@@ -1,5 +1,7 @@
 # ini untuk convert decimal dll
-```json
- - asd
+## function baru ada :
 
-```
+- decimalToBiner
+- decimalToHexa
+- binaryToDecimal
+- hexaToDecimal
