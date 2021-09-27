@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>converter</p>
+    <br>
+    <div>
+        <label for="nilai">Nilai</label>
+        <input type="text" id="nilai">
+    </div>
+    <br>
+    <div>
+        <label for="convert">Convert ke </label>
+        <select name="" id="convert">
+            <option value="decimalToBiner">decimal to biner</option>
+            <option value="decimalToHexa">decimal to hexa</option>
+            <option value="binaryToDecimal">binary to decimal</option>
+            <option value="hexaToDecimal">hexa to decimal</option>
+        </select>
+    </div>
+    <br>
+    <button type="button" onclick="submit()">Submit</button>
+    <br>
+    <br>
+    <div>
+        <label for="">hasil</label>
+        <textarea disabled id="hasil" cols="30" rows="10"></textarea>
+    </div>
+    <script>
+
+        function submit(){
+            console.clear()
+            let nilai = document.querySelector('#nilai').value
+            let function_convert = document.querySelector('#convert').value
+            let hasil = eval(function_convert)(nilai)
+
+            document.querySelector("#hasil").value = hasil
+        }
+        // decimalToBiner(11)
+        // decimalToHexa(756)
+        // binaryToDecimal(100)
+        // hexaToDecimal('2f4')
+
+
+        /* 
+            function baru ada
+
+            decimalToBiner(decimal)
+            decimalToHexa(decimal)
+            binaryToDecimal(binary)
+        */
+
+
+        function decimalToBiner(bilangan){
+            console.log('decimal convert to biner');
+            console.log(`soal : ${bilangan}`);
+            console.log('');
+            let decimal_dipake = bilangan
+            let hasil_convert_to_biner = []
+            for(let i = 1; i <= bilangan; i++){
+                let sisa = decimal_dipake % 2
+                let decimal_selanjutnya = decimal_dipake - sisa
+                console.log(`${decimal_dipake} :2  | ${decimal_selanjutnya} | ${sisa}`);
+                hasil_convert_to_biner.push(sisa)
+                decimal_dipake = decimal_selanjutnya / 2
+                if(decimal_dipake <= 0){
+                    break
+                }
+            }
+
+            console.log('');
+            console.log('sebelum di balik');
+            console.log(hasil_convert_to_biner);
+            console.log('sudah dibalik dan yang akan di pake biner');
+            console.log(hasil_convert_to_biner.reverse());
+            return hasil_convert_to_biner.join(' ')
+        }
+
+        function decimalToHexa(bilangan){
+            console.log('decimal convert to hexa');
+            console.log(`soal : ${bilangan}`);
+            console.log('');
+            let decimal_dipake = bilangan
+            let hasil_convert_to_hexa = []
+            for(let i = 1; i <= bilangan; i++){
+                let sisa = decimal_dipake % 16
+                let decimal_selanjutnya = decimal_dipake - sisa
+                console.log(`${decimal_dipake} :2  | ${decimal_selanjutnya} | ${sisa}`);
+                hasil_convert_to_hexa.push(sisa.toString(16))
+                decimal_dipake = decimal_selanjutnya / 16
+                if(decimal_dipake <= 0){
+                    break
+                }
+            }
+
+            console.log('');
+            console.log('sebelum di balik');
+            console.log(hasil_convert_to_hexa);
+            console.log('sudah dibalik dan yang akan di pake hexa');
+            console.log(hasil_convert_to_hexa.reverse());
+            return hasil_convert_to_hexa.join(' ')
+        }
+
+
+        function binaryToDecimal(binary_bilangan){
+            console.log('binary convert to decimal');
+            console.log(`soal : ${binary_bilangan}`);
+            console.log('');
+            let string_binary_bilangan = binary_bilangan.toString()
+            let converse = []
+            let hasil_converse = []
+
+            for(let i = 0; i < string_binary_bilangan.length; i++){
+                converse.push(2**i)
+            }
+            converse = converse.reverse()
+
+            for(let i = 0; i < string_binary_bilangan.length; i++){
+                let binary = string_binary_bilangan[i]
+                let converse_value = converse[i]
+                let hasil = parseInt(binary) * parseInt(converse_value)
+                hasil_converse.push(hasil)
+                console.log(`${binary} * ${converse_value} | ${hasil}`);
+            }
+
+            let jumlah = hasil_converse.reduce((total, value) => {
+                return total + value
+            })
+
+            console.log('');
+            console.log('jadi decimalnya adalah : ');
+            console.log(hasil_converse.join(' + ') + ' :');
+            console.log(jumlah);
+
+            return jumlah
+        }
+
+        function hexaToDecimal(hexa_bilangan){
+            console.log('hexa convert to decimal');
+            console.log(`soal : ${hexa_bilangan}`);
+            console.log('');
+            let string_hexa_bilangan = hexa_bilangan.toString()
+            let converse = []
+            let hasil_converse = []
+
+            for(let i = 0; i < string_hexa_bilangan.length; i++){
+                converse.push(16**i)
+            }
+            converse = converse.reverse()
+
+            for(let i = 0; i < string_hexa_bilangan.length; i++){
+                let hexa = string_hexa_bilangan[i]
+                let converse_value = converse[i]
+                let hasil = parseInt(hexa, 16) * parseInt(converse_value)
+                hasil_converse.push(hasil)
+                console.log(`${hexa} -> ${parseInt(hexa, 16)} * ${converse_value} | ${hasil}`);
+            }
+
+            let jumlah = hasil_converse.reduce((total, value) => {
+                return total + value
+            })
+
+            console.log('');
+            console.log('jadi decimalnya adalah : ');
+            console.log(hasil_converse.join(' + ') + ' :');
+            console.log(jumlah);
+
+            return jumlah
+        }
+    </script>
+</body>
+</html>
